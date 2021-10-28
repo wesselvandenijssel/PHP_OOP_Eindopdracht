@@ -6,6 +6,8 @@ class Words
    private $table_name = "profanity";
    // object properties
    public $id;
+   public $word;
+   public $grace;
    // constructor with $db as database connection
    public function __construct($db)
    {

@@ -80,10 +80,21 @@ function update(){
     }
 }
 function delete(){
-    // select all query
-   $query = "DELETE * FROM " . $this->table_name;
-   $result = $this->conn->query($query);
-   return $result;
-   echo $result;
+    if(isset($_GET['delete'])){
+        $id = $_GET['delete'];
+        $sql = "DELETE FROM $this->table_name WHERE `id`='$id'"  ;
+        // echo $sql;
+        // echo $id;
+        // echo $title;
+        $result = mysqli_query($this->conn, $sql);
+        if($result){
+            echo '<script type="text/javascript"> alert("Data Update")</script>';
+            header ("refresh:0;url=read_all.php");
+            echo "Redirecting.....";
+        }
+        else{
+            echo '<script type="text/javascript"> alert("Data NOT Update")</script>';
+        }
+    }
 }
 }

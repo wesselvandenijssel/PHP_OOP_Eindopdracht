@@ -40,8 +40,15 @@ while( $row = mysqli_fetch_array( $result, MYSQLI_ASSOC ) ) {
 
 <body>
     <form action="check.php" method="POST">
-        <textarea name="text" id="text" cols="30" rows="10">Hello world. It's a beautiful day</textarea><br>
+        <textarea name="text" id="text" cols="30" rows="10">Dit is een test aap</textarea><br>
         <!-- <button onclick="check()" id="button">Submit</button><br> -->
+        <p>Please select your gradation:</p>
+  <input type="radio" id="one" name="gradation" value="one">
+  <label for="one">1</label><br>
+  <input type="radio" id="two" name="gradation" value="two">
+  <label for="two">2</label><br>
+  <input type="radio" id="three" name="gradation" value="three">
+  <label for="three">3</label><br>
         <input type="submit" name="button" value="Check"><br>
                 
     </form>

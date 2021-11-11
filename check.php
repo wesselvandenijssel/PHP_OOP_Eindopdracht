@@ -48,6 +48,9 @@ if (!$conn) {
     </form>
     <a href="index.php">index</a>
     <?php
+    if (isset($_POST['text'])){
+      if (isset($_POST['gradation'])){
+        if ($_POST['gradation'] == "one"){
 $str = $_POST['text'];
 str_replace("'", '', $str);
 $words = explode(" ",$str);
@@ -94,10 +97,10 @@ foreach ($exploded_array as $element)
             $key = array_search($word_found, $exploded_array);
             $length = strlen($word_found) - 1;
             $replace = array($key => $new_word);
-            echo $word_found;
-            print_r($replace);
+            // echo $word_found;
+            // print_r($replace);
             $exploded_array = array_replace($exploded_array, $replace);
-            print_r($exploded_array);
+            // print_r($exploded_array);
             $words[$elementArray] = $new_word;
             // echo $new_word;
       }
@@ -114,6 +117,119 @@ foreach ($exploded_array as $element)
 // echo preg_replace($pattern, '***', $str);
 ?>
     <p id="demo"><?php echo $new_string; ?></p>
+    <?php
+    }
+    if ($_POST['gradation'] == "two"){
+      $str = $_POST['text'];
+      str_replace("'", '', $str);
+      $words = explode(" ",$str);
+      
+      // print_r (explode(" ",$str));
+      $exploded_array = explode('~', $str);
+      
+      // $tags = explode('|' , $str);
+      
+      // $count =count($tags);
+      //   echo 'Count is: '.$count .'</br>';
+      // $i = 1 ;
+      // foreach($tags as $key) {
+      
+      //     echo $i.' '.$key .'</br>';
+      // $i++;
+      // }
+      
+      foreach ($exploded_array as $element)
+      {
+        //  echo $element;
+         $elements = str_word_count($element);
+        //  print_r ($exploded_array);
+          for ($x = 0; $x <= ($elements -1); $x++) {
+              // echo $x;
+              $elementArray = $x;
+          // echo "<br><br>The word is: " . "$words[$elementArray]"." <br>";
+          $word = preg_replace('/\s+/', '', $words[$elementArray]);
+          $sql = "SELECT word FROM profanity 
+          WHERE word LIKE " . "'". "$word" . "'";
+          $result = mysqli_query($conn, $sql);
+      
+          if (mysqli_num_rows($result) > 0) {
+            // output data of each row
+            $p = 0;
+            while($row = mysqli_fetch_assoc($result)) {
+              // echo "word: " . $row["word"]. "<br>";
+              $p++;
+                  // echo $p;
+                  // echo "test";
+                  // preg_replace($row["word"], "", "*");
+                  $word_found = $row['word'];
+                  $new_word = preg_replace('/(?!^.?).(?!.{0}$)/', '*', $word);
+                  $key = array_search($word_found, $exploded_array);
+                  $length = strlen($word_found) - 1;
+                  $replace = array($key => $new_word);
+                  // echo $word_found;
+                  // print_r($replace);
+                  $exploded_array = array_replace($exploded_array, $replace);
+                  // print_r($exploded_array);
+                  $words[$elementArray] = $new_word;
+                  // echo $new_word;
+            }
+          } else {
+            // echo "0 results";
+          }
+          // echo $sql;
+        }
+        $new_string = implode(" ", $words);  
+        mysqli_close($conn);   
+      }
+      // $str = 'Visit Microsoft!';
+      // $pattern = '/microsoft/i';
+      // echo preg_replace($pattern, '***', $str);
+      ?>
+    <p id="demo"><?php echo $new_string; ?></p>
+    <?php
+          }
+          if ($_POST['gradation'] == "three"){
+            $str = $_POST['text'];
+            str_replace("'", '', $str);
+            $words = explode(" ",$str);
+            
+            // print_r (explode(" ",$str));
+            $exploded_array = explode('~', $str);
+            
+            // $tags = explode('|' , $str);
+            
+            // $count =count($tags);
+            //   echo 'Count is: '.$count .'</br>';
+            // $i = 1 ;
+            // foreach($tags as $key) {
+            
+            //     echo $i.' '.$key .'</br>';
+            // $i++;
+            // }
+            
+            foreach ($exploded_array as $element)
+            {
+              //  echo $element;
+               $elements = str_word_count($element);
+              //  print_r ($exploded_array);
+                for ($x = 0; $x <= ($elements -1); $x++) {
+                    // echo $x;
+                    $elementArray = $x;
+                // echo "<br><br>The word is: " . "$words[$elementArray]"." <br>";
+                $word = preg_replace('/\s+/', '', $words[$elementArray]);
+              }
+              $new_string = implode(" ", $words);  
+              mysqli_close($conn);   
+            }
+            // $str = 'Visit Microsoft!';
+            // $pattern = '/microsoft/i';
+            // echo preg_replace($pattern, '***', $str);
+            ?>
+    <p id="demo"><?php echo $new_string; ?></p>
+    <?php
+                }
+        }}
+    ?>
 </body>
 
 </html>

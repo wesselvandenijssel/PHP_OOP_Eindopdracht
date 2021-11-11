@@ -1,4 +1,3 @@
-# glu-base-api
 # PHP Profanity Validator
 
 I made this package to perform a validation for swearwords using PHP validation service.

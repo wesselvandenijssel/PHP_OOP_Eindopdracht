@@ -13,10 +13,10 @@ Type your swearwords in the index.php and click the gradation you want.
 
 ## CRUD
 
-To add words in the database go to /objects/create.php and fill the form, if you set the checked to 1 the swearword is aproved.
+To add words in the database go to /words/create.php and fill the form, if you set the checked to 1 the swearword is aproved.
 
-To edit words go to /objects/update.php and fill in the form. Chose the id of the value you want to edit at the dropdown menu.
+To edit words go to /words/update.php and fill in the form. Chose the id of the value you want to edit at the dropdown menu.
 
-To delete a column in the database go to /objects/delete.php and select the id
+To delete a column in the database go to /words/delete.php and select the id
 
-to vieuw all the values in the database, go to /objects/read_all.php
+to vieuw all the values in the database, go to /words/read_all.php
